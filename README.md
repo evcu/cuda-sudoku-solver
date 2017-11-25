@@ -1,6 +1,12 @@
 ### Sudoku Solver
 This is an sudoku-solver implementation coded in three days for GPU-class homework.
 
+```bash
+nvcc -arch sm_35 -rdc=true -o sudokusolver sudokusolver.cu
+./sudokusolver inp.in
+```
+
+Which will print out the stdout and save the results in to the inp.sol file.
 ## Parallelizing Sudoku
 is hard. The most popular cpu-solution is backtracking, which is built on backtracking and recursion. [This webpage](https://www.sudoku-solutions.com/) is really nice to improve your sudoku skills and it has `View Steps` functionality to look the logic behind the solution.
 
