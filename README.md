@@ -5,12 +5,25 @@ This is an sudoku-solver implementation coded in three days for GPU-class homewo
 nvcc -arch sm_35 -rdc=true -o sudokusolver sudokusolver.cu
 ./sudokusolver inp.in
 ```
-
 Which will print out the stdout and save the results in to the inp.sol file.
-## Parallelizing Sudoku
-is hard. The most popular cpu-solution is backtracking, which is built on backtracking and recursion. [This webpage](https://www.sudoku-solutions.com/) is really nice to improve your sudoku skills and it has `View Steps` functionality to look the logic behind the solution.
 
-However since it is all about parallelizing I've focused on parallelizing and only implemented the basic logic. Basic logic is this:
+Input should have the following form. You can add many problems, separating the 9 line with a space.
+```
+400000805
+030000000
+000700000
+020000060
+000080400
+000010000
+000603070
+500200000
+104000000
+```
+
+## Parallelizing Sudoku
+is hard. The most popular cpu-solution is backtracking, which is built on backtracking and recursion and recursion is not efficient and complicated on GPUs. 
+
+[This webpage](https://www.sudoku-solutions.com/) is really nice to improve your sudoku skills and it has `View Steps` functionality to look the logic behind the solution. There are many rules which can be applied on a state to fill cells deterministically. Since I am interesting in the parallization of the problem I didn't implement these rules. I've focused on parallelizing and implemented only the basic logic. Basic logic is this:
 1. For each cell(out of 81) if it is empty, find out the set of digits which are not used in the current row, column or cell-group. This set is the possibility set of each cell.
 2. If the set is empty, this setting/board is invalid.(which may happen as a result of incorrect guessing)
 3. If the set consists of single element, fill the cell with the only value you got.
