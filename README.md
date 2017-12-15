@@ -5,7 +5,8 @@ This is an sudoku-solver implementation coded in three days for GPU-class homewo
 nvcc -arch sm_35 -rdc=true -o sudokusolver sudokusolver.cu
 ./sudokusolver inp.in
 ```
-Which will print out the stdout and save the results in to the inp.sol file.
+Which will print out the stdout and save the results of 95 very hard sudoku in to the inp.sol file __in less then 2 seconds.__
+
 
 Input should have the following form. You can add many problems, separating the 9 line with a space.
 ```
@@ -43,8 +44,6 @@ Current:
 
 Future:
 - Share bit mask generation task better within block.
-
-__<2s total kernel time for 95 hard sudoku.__
 
 ## What cuda-sudoku-solver does.
 The `controller` kernel is the main Kernel which calls  `fillSudokuSafeAndFork` repeatedly until a solution is found.
